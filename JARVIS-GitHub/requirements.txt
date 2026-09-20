@@ -1,0 +1,8 @@
+openai-whisper
+openwakeword
+numpy
+requests
+pyttsx3
+sounddevice
+soundfile
+onnxruntime

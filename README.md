@@ -1,154 +1,179 @@
-# JARVIS - Local Windows Voice Assistant
+# 🤖 JARVIS – Local Windows Voice Assistant
 
-A beginner-friendly, local-first JARVIS-style desktop assistant for Windows.
+A local-first, voice-controlled AI assistant for Windows built with **Python, Ollama, Llama 3.2, Whisper, OpenWakeWord, and Windows automation**.
 
-JARVIS currently combines:
+JARVIS can listen for a wake word, understand spoken commands, generate responses locally, speak back, and perform predefined actions on the Windows desktop.
 
-- **Llama 3.2 3B** through Ollama for local AI responses
-- **Whisper** for speech-to-text
-- **OpenWakeWord** for the `Hey Jarvis` wake phrase
-- **pyttsx3** for spoken responses
-- Predefined Windows tools for apps, folders, Chrome, Google, YouTube, date, and time
+## ✨ Features
 
-## How it works
+- 🎤 Voice input through the microphone
+- ⚡ “Hey Jarvis” wake-word detection
+- 🧠 Local AI using Llama 3.2 3B with Ollama
+- 🗣️ Speech-to-text using Whisper
+- 🔊 Voice responses using pyttsx3
+- 💻 Windows application and folder automation
+- 🌐 Chrome, Google, and YouTube search
+- 📦 Windows executable packaging with PyInstaller
+- 🔒 Local-first AI processing
+
+## 🧠 How It Works
 
 ```text
-Microphone
-    ↓
-OpenWakeWord ("Hey Jarvis")
-    ↓
-Whisper
-    ↓
-JARVIS Python controller
-    ├── Safe computer tools
-    └── Ollama → Llama 3.2 3B
-    ↓
-pyttsx3
-    ↓
-Speakers
+🎤 Voice
+   ↓
+⚡ Wake Word Detection
+   ↓
+🗣️ Whisper Speech-to-Text
+   ↓
+🧠 JARVIS Core
+   ↓
+┌───────────────┬───────────────┐
+│               │
+💻 Computer     🧠 Ollama
+   Tools         Llama 3.2
+│               │
+└───────┬───────┘
+        ↓
+   🔊 Voice Response
+````
+
+## 🛠️ Tech Stack
+
+| Technology   | Purpose                      |
+| ------------ | ---------------------------- |
+| Python       | Core application logic       |
+| Ollama       | Local LLM runtime            |
+| Llama 3.2 3B | AI model                     |
+| Whisper      | Speech-to-text               |
+| OpenWakeWord | Wake-word detection          |
+| pyttsx3      | Text-to-speech               |
+| SoundDevice  | Microphone input             |
+| SoundFile    | Audio recording              |
+| Requests     | Ollama API communication     |
+| PyInstaller  | Windows executable packaging |
+
+## 🚀 Example Commands
+
+After saying **“Hey Jarvis”**, try:
+
+```text
+Open Chrome
 ```
 
-## Requirements
-
-- Windows 10/11
-- Python 3.13 (the current development setup uses Python 3.13)
-- Ollama
-- Llama 3.2 3B model
-- FFmpeg
-- Working microphone and speakers
-
-## Setup
-
-### 1. Install Ollama
-
-Install Ollama for Windows from:
-
-https://ollama.com/download/windows
-
-Then download the model:
-
-```powershell
-ollama pull llama3.2:3b
+```text
+Open Notepad
 ```
 
-### 2. Install FFmpeg
-
-With WinGet:
-
-```powershell
-winget install --id Gyan.FFmpeg
+```text
+Open Calculator
 ```
 
-Close and reopen PowerShell after installation, then verify:
-
-```powershell
-ffmpeg -version
+```text
+Open Downloads
 ```
 
-### 3. Create a Python virtual environment
-
-From the project folder:
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+```text
+Search Google for Python tutorials
 ```
 
-### 4. Install Python dependencies
+```text
+Search YouTube for machine learning tutorials
+```
 
-```powershell
+```text
+What is artificial intelligence?
+```
+
+## 💻 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/nithishedward/jarvis-local-windows-assistant.git
+cd jarvis-local-windows-assistant
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 5. Start JARVIS
+### 3. Install Ollama
 
-```powershell
+Install Ollama for Windows, then download the required model:
+
+```bash
+ollama pull llama3.2:3b
+```
+
+### 4. Run JARVIS
+
+```bash
 python jarvis_main.py
 ```
 
-On first use, Whisper and OpenWakeWord may download their model files.
+## 📦 Build the Windows Executable
 
-## Usage
+JARVIS can be packaged as a Windows application using PyInstaller:
 
-Wait for:
-
-```text
-JARVIS ONLINE
+```bash
+pyinstaller --noconfirm --clean --onedir --name JARVIS --collect-all openwakeword --collect-data whisper jarvis_main.py
 ```
 
-Then say:
-
-> Hey Jarvis
-
-JARVIS will answer:
-
-> Yes, Edward?
-
-Then try:
-
-> Open Chrome
-
-> Search Python tutorial in Chrome
-
-> Search YouTube for machine learning tutorials
-
-> Open Downloads
-
-> What time is it?
-
-For normal questions, JARVIS sends the request to the local Llama model through Ollama.
-
-## Safety
-
-JARVIS uses a predefined set of computer tools. It does **not** provide the AI with unrestricted PowerShell, command execution, or file deletion abilities.
-
-Personal memory files and audio recordings are ignored by Git so they are not accidentally committed.
-
-## Project structure
+The executable will be created inside:
 
 ```text
-JARVIS/
-├── jarvis_main.py       # Main voice assistant
-├── jarvis_tools.py      # Predefined computer actions
-├── requirements.txt     # Python dependencies
-├── .gitignore           # Files that should not be committed
-└── README.md            # Project documentation
+dist/JARVIS/
 ```
 
-## Current limitations
+## 🔐 Privacy
 
-- Wake phrase is currently `Hey Jarvis`.
-- Whisper transcription accuracy depends on the microphone, environment, and speech.
-- The assistant currently focuses on Windows desktop actions and local AI chat.
-- The project is designed for local use; Ollama must be running on the same PC.
+JARVIS follows a **local-first architecture**.
 
-## Roadmap
+Core components such as:
 
-- [ ] Custom `Jarvis` wake word
-- [ ] Better conversational memory
-- [ ] Screen vision
-- [ ] Safer multi-step agent/tool execution
-- [ ] Better Windows application control
-- [ ] Desktop GUI / JARVIS HUD
-- [ ] Windows startup integration
-- [ ] Packaged Windows installer
+* Speech recognition
+* Wake-word detection
+* LLM inference
+
+can run locally on the user's Windows machine through **Whisper, OpenWakeWord, and Ollama**.
+
+Internet access is used for features such as web searches and downloading dependencies or models.
+
+## 🗺️ Roadmap
+
+* [x] Voice input
+* [x] Speech-to-text
+* [x] Local LLM integration
+* [x] Text-to-speech
+* [x] Wake-word detection
+* [x] Windows automation
+* [x] Web search
+* [x] Windows executable
+* [ ] Smarter intent and tool system
+* [ ] Structured persistent memory
+* [ ] Computer vision
+* [ ] Advanced desktop interaction
+* [ ] JARVIS-style graphical interface
+* [ ] Modular skill system
+
+## 🎯 Project Goal
+
+The goal of JARVIS is to explore how **local AI, voice interfaces, automation, and AI agents** can work together to create a practical desktop assistant.
+
+## 🤝 Contributing
+
+Ideas, suggestions, improvements, and contributions are welcome.
+
+Feel free to open an issue or submit a pull request.
+
+## 👨‍💻 Developer
+
+**Nithish Edward**
+
+Artificial Intelligence & Machine Learning Student
+
+🔗 GitHub: [https://github.com/nithishedward](https://github.com/nithishedward)
+
+---

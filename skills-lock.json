@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "open-computer-use-automation": {
+      "source": "reason-machines/codex-skills",
+      "sourceType": "github",
+      "skillPath": "skills/open-computer-use-automation/SKILL.md",
+      "computedHash": "f6c22004e38315bfa527edce1e7d52b41a9c840b7740b5a119a580e9ba763324"
+    },
+    "python-pro": {
+      "source": "sickn33/agentic-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/python-pro/SKILL.md",
+      "computedHash": "2868b2ed6e29a5cdb93525b93f98f49696a5d6ada9ab503b73294737052db5f3"
+    }
+  }
+}
